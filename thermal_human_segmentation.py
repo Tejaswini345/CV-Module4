@@ -14,24 +14,6 @@ usually a single compact blob that is radiometrically hotter (brighter)
 than most of the background, so a global/adaptive intensity threshold is
 enough to get a very clean boundary, refined with morphology.
 
-Pipeline:
-  Stage A — Grayscale conversion (handles both single-channel radiometric
-            PNGs and 8-bit pseudo-colored/palette thermal JPEGs) + a light
-            Gaussian blur to suppress sensor noise.
-  Stage B — Otsu's method picks the optimal global threshold that splits
-            the bimodal intensity histogram (hot body vs. cooler
-            background/scene) automatically -- no manual threshold, no
-            learned parameters.
-  Stage C — Polarity check: try both "bright = foreground" and
-            "dark = foreground" (thermal palettes vary), and automatically
-            keep whichever produces a single compact, human-plausible blob
-            (using simple geometric heuristics: extent/aspect ratio, not a
-            classifier).
-  Stage D — Morphological opening/closing removes sensor speckle noise and
-            fills small gaps; connected-component analysis keeps only the
-            largest blob (the person); contour extraction gives the exact
-            boundary.
-
 USAGE
 ----------------------------------------------------------------------------
     python3 thermal_human_segmentation.py --input person_thermal.jpg --output out_thermal

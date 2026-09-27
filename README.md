@@ -21,8 +21,6 @@ requirements.txt
 
 ## Step 1 — Add your images
 
-Same naming convention as before, in `assets/`:
-
 ```
 assets/
   sample1_rgb.jpg
@@ -53,31 +51,14 @@ assignment itself, you probably only need `pip install flask`.
 python3 app.py
 ```
 
-Open **http://localhost:5000** in your browser. That's your whole "run
-the app" step — same as running any of your other Python scripts, just
-this one keeps running and serves a web page instead of printing to the
-terminal and exiting.
+Open **http://localhost:5000** in your browser. 
 
 To stop it, go back to the terminal and press `Ctrl+C`.
 
 ## Running from VS Code
 
 Open this folder in VS Code, open `app.py`, and either:
-- Click the ▶ "Run" button in the top-right, or
+- Click the "Run" button in the top-right, or
 - Open the built-in terminal (`` Ctrl+` ``) and run `python3 app.py`
 
 Then open `http://localhost:5000` in your browser, same as above.
-
-## Putting it online for your submission link
-
-A Flask app needs a real backend host (not a plain static site like
-GitHub Pages, since Python has to keep running). Free options that work
-well for a student project:
-- **Render** — "New → Web Service" (not "Static Site"), connect your
-  repo, set the start command to `python app.py`
-- **PythonAnywhere** or **Railway** are similar free alternatives
-
-If your assignment mainly needs the screen recording to show it working,
-running it locally with `python3 app.py` and recording that is usually
-enough — check with your instructor if a permanently-hosted link is
-required.

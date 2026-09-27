@@ -9,32 +9,6 @@ WHAT THIS SCRIPT DOES
 Finds the exact pixel boundary of a human in a regular RGB image using only
 classical (non-ML, non-deep-learning) OpenCV / NumPy operations:
 
-  Stage A — Frequency-domain saliency (Spectral Residual method,
-            Hou & Zhang, CVPR 2007):
-            1. Resize image, take log-magnitude spectrum of its 2D DFT.
-            2. Smooth the log spectrum (avg filter) to get the "expected"
-               spectral envelope; subtract it from the true log spectrum
-               -> spectral residual.
-            3. Inverse DFT the residual (keeping the original phase) and
-               square it -> a saliency map that lights up the most
-               "unpredictable" (i.e. foreground/object) regions.
-            This is pure signal processing, no learned weights.
-
-  Stage B — Otsu thresholding of the saliency map to get a rough
-            foreground blob, cleaned with morphology, giving an initial
-            bounding rectangle (no classifier, no pretrained detector).
-
-  Stage C — GrabCut (Rother et al. 2004): an iterative energy-minimization
-            segmentation (Gaussian-Mixture color models + a graph-cut over
-            an MRF). GrabCut is a classical unsupervised optimizer that is
-            re-fit from scratch on every image; it contains no pretrained
-            parameters and is standard in the OpenCV tutorials for exactly
-            this kind of foreground/boundary extraction task.
-
-  Stage D — Largest-contour extraction + morphological polish gives the
-            final exact boundary, saved as a binary mask and as a contour
-            overlay on the original image.
-
 USAGE
 ----------------------------------------------------------------------------
     python3 rgb_human_segmentation.py --input person.jpg --output out_rgb
